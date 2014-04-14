@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dede.App.MPGOHelper", "Dede.App.MPGOHelper\Dede.App.MPGOHelper.csproj", "{52392C6B-C6FF-468E-9C30-F317A41E2C81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPGOHelper", "Dede.App.MPGOHelper\MPGOHelper.csproj", "{52392C6B-C6FF-468E-9C30-F317A41E2C81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

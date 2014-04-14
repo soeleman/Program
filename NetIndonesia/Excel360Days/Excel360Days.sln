@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dede.App.Excel360Days", "Dede.App.Excel360Days\Dede.App.Excel360Days.csproj", "{4CAC318B-3E15-44AF-99AA-3E91840268A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel360Days", "Dede.App.Excel360Days\Excel360Days.csproj", "{4CAC318B-3E15-44AF-99AA-3E91840268A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
