@@ -75,13 +75,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="Pages\DataGenericResult.vb" />
+    <Compile Include="Pages\DataSourceResult.vb" />
+    <Compile Include="Pages\DataTableResult.vb" />
+    <Compile Include="Forms\FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="Forms\FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Datas\IDataSourceRepository.vb" />
+    <Compile Include="Domains\ItemGrid.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -97,8 +102,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Pages\PageList.vb" />
+    <Compile Include="Datas\RepositoryDataTable.vb" />
+    <Compile Include="Datas\RepositoryFactory.vb" />
+    <Compile Include="Datas\RepositoryItemGrid.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

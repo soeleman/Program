@@ -46,15 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormMain.cs">
+    <Compile Include="Pages\DataGenericResult.cs" />
+    <Compile Include="Pages\DataSourceResult.cs" />
+    <Compile Include="Pages\DataTableResult.cs" />
+    <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
+    <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Datas\IDataSourceRepository.cs" />
+    <Compile Include="Domains\ItemGrid.cs" />
+    <Compile Include="Pages\PageList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormMain.resx">
+    <Compile Include="Datas\RepositoryDataTable.cs" />
+    <Compile Include="Datas\RepositoryFactory.cs" />
+    <Compile Include="Datas\RepositoryItemGrid.cs" />
+    <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

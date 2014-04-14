@@ -3,6 +3,8 @@
     using System;
     using System.Windows.Forms;
 
+    using Dede.App.GridViewPaging.Forms;
+
     static class Program
     {
         [STAThread]
