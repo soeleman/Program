@@ -47,7 +47,8 @@
         }
 
         private static void SpeechRecognizedHandler(
-            Object sender, SpeechRecognizedEventArgs e)
+            Object sender, 
+            SpeechRecognizedEventArgs e)
         {
             if (e.Result != null &&
                 !String.IsNullOrEmpty(e.Result.Text))
