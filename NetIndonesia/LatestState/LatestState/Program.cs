@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Dynamic;
     using System.Linq;
 
     internal sealed class Program
@@ -33,38 +34,66 @@
                         new TranscationState { Level = 9, State = "Finish" }
                     };
 
-            var results =
-                transactions
-                    .Select(s => new
+            transactions
+                .Select(s => new
+                {
+                    s.TransactionId,
+                    s.Status,
+                    StateLevel = states.First(p => p.State.Equals(s.Status)).Level
+                })
+                .GroupBy(
+                    ks => ks.TransactionId,
+                    (k, g) => new
                     {
-                        s.TransactionId,
-                        s.Status,
-                        StateLevel = states.First(p => p.State.Equals(s.Status)).Level
+                        Id = k,
+                        Items = g
                     })
-                    .GroupBy(
-                        ks => ks.TransactionId,
-                        (k, g) => new
-                        {
-                            Id = k,
-                            Items = g
-                        })
-                    .Select(g =>
+                .Select(g =>
+                {
+                    var i = g.Items.First(p => p.StateLevel.Equals(g.Items.Max(s => s.StateLevel)));
+                    return new
                     {
-                        var i = g.Items.First(p => p.StateLevel.Equals(g.Items.Max(s => s.StateLevel)));
-                        return new
-                        {
-                            Id = i.TransactionId,
-                            CustomerName = customers.First(p => p.Id.Equals(i.TransactionId)).Name,
-                            i.Status
-                        };
-                    })
-                    .ToList();
+                        Id = i.TransactionId,
+                        CustomerName = customers.First(p => p.Id.Equals(i.TransactionId)).Name,
+                        i.Status
+                    };
+                })
+                .ToList()
+                .ForEach(a =>
+                    Console.WriteLine(
+                        @"Id = {0}, Customer = {1}, Status = {2}",
+                        a.Id,
+                        a.CustomerName,
+                        a.Status));
 
-            results.ForEach(a =>
+            (
+                from g in 
+                (
+                    from tf in transactions 
+                    select new
+                    {
+                        tf.TransactionId, 
+                        tf.Status, 
+                        StateLevel = states.First(p => p.State.EndsWith(tf.Status)).Level
+                    }
+                )
+                group g by g.TransactionId into grp
+                let maxState = grp.Max(s => s.StateLevel)
+                from p in grp
+                where p.StateLevel.Equals(maxState)
+                select new 
+                {
+                    Id = p.TransactionId, 
+                    Customer = customers.First(c => c.Id.Equals(p.TransactionId)).Name, 
+                    p.Status
+                }
+            )
+            .ToList()
+            .ForEach(a =>
                 Console.WriteLine(
                     @"Id = {0}, Customer = {1}, Status = {2}",
                     a.Id,
-                    a.CustomerName,
+                    a.Customer,
                     a.Status));
         }
     }
