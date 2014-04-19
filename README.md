@@ -1,4 +1,4 @@
 Program
 =======
 
-Collection of social media sample source
+Collection of Samples for social media
