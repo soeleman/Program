@@ -49,28 +49,24 @@
                         a.Customer,
                         a.Status));
 
-            (
-                from g in 
-                    (
-                        from tf in ctx.TransactionFlows 
-                        select new
-                        {
-                            tf.TransactionId, 
-                            tf.Status, 
-                            StateLevel = ctx.TranscationStates.FirstOrDefault(p => p.State.Equals(tf.Status)).Level
-                        }
-                    )
-                group g by g.TransactionId into grp
-                let maxState = grp.Max(s => s.StateLevel)
-                from p in grp
-                where p.StateLevel.Equals(maxState)
+            (from g in 
+                (from tf in ctx.TransactionFlows 
                 select new
                 {
-                    Id = p.TransactionId, 
-                    Customer = ctx.Customers.FirstOrDefault(c => c.Id.Equals(p.TransactionId)).Name, 
-                    p.Status
-                }
-            )
+                    tf.TransactionId, 
+                    tf.Status, 
+                    StateLevel = ctx.TranscationStates.FirstOrDefault(p => p.State.Equals(tf.Status)).Level
+                })
+            group g by g.TransactionId into grp
+            let maxState = grp.Max(s => s.StateLevel)
+            from p in grp
+            where p.StateLevel.Equals(maxState)
+            select new
+            {
+                Id = p.TransactionId, 
+                Customer = ctx.Customers.FirstOrDefault(c => c.Id.Equals(p.TransactionId)).Name, 
+                p.Status
+            })
             .ToList()
             .ForEach(a =>
                 Console.WriteLine(

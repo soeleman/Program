@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Dynamic;
     using System.Linq;
 
     internal sealed class Program
@@ -66,28 +65,24 @@
                         a.CustomerName,
                         a.Status));
 
-            (
-                from g in 
-                (
-                    from tf in transactions 
-                    select new
-                    {
-                        tf.TransactionId, 
-                        tf.Status, 
-                        StateLevel = states.First(p => p.State.EndsWith(tf.Status)).Level
-                    }
-                )
-                group g by g.TransactionId into grp
-                let maxState = grp.Max(s => s.StateLevel)
-                from p in grp
-                where p.StateLevel.Equals(maxState)
-                select new 
+            (from g in 
+                (from tf in transactions 
+                select new
                 {
-                    Id = p.TransactionId, 
-                    Customer = customers.First(c => c.Id.Equals(p.TransactionId)).Name, 
-                    p.Status
-                }
-            )
+                    tf.TransactionId, 
+                    tf.Status, 
+                    StateLevel = states.First(p => p.State.Equals(tf.Status)).Level
+                })
+            group g by g.TransactionId into grp
+            let maxState = grp.Max(s => s.StateLevel)
+            from p in grp
+            where p.StateLevel.Equals(maxState)
+            select new 
+            {
+                Id = p.TransactionId, 
+                Customer = customers.First(c => c.Id.Equals(p.TransactionId)).Name, 
+                p.Status
+            })
             .ToList()
             .ForEach(a =>
                 Console.WriteLine(
