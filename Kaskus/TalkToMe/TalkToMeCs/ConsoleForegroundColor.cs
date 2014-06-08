@@ -5,7 +5,8 @@
     internal sealed class ConsoleForegroundColor 
         : IDisposable
     {
-        public ConsoleForegroundColor(ConsoleColor color)
+        public ConsoleForegroundColor(
+            ConsoleColor color)
         {
             Console.ForegroundColor = color;
         }
