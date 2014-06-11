@@ -18,7 +18,7 @@
 
             (from table in doc.DocumentNode.SelectNodes(XpathTable)
              where table.Attributes.Contains(@"id")
-             from row in table.SelectNodes("tr")
+             from row in table.SelectNodes(@"tr")
              where row.ChildNodes.Count >= 2 && row.ChildNodes.Any(p => p.Name.Equals(@"td"))
              select row)
             .ToList()
@@ -30,7 +30,9 @@
                     node.ChildNodes[3].ChildNodes[0].InnerText,
                     node.ChildNodes[4].ChildNodes[0].InnerText));
 
-            doc.DocumentNode.SelectNodes(XpathTable)
+            doc
+                .DocumentNode
+                .SelectNodes(XpathTable)
                 .Where(table => table.Attributes.Contains(@"id"))
                 .SelectMany(table => table.SelectNodes(@"tr"), (table, row) => new { table, row })
                 .Where(p => p.row.ChildNodes.Count >= 2 && p.row.ChildNodes.Any(pn => pn.Name.Equals(@"td")))
