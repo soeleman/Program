@@ -3,8 +3,6 @@
     using System;
     using System.Linq;
 
-    using Hap = HtmlAgilityPack;
-
     // http://dotnetfiddle.net/U21IBg
     internal static class Program
     {
@@ -14,7 +12,7 @@
 
         internal static void Main()
         {
-            var doc = (new Hap.HtmlWeb()).Load(UrlBiKurs);
+            var doc = (new HtmlAgilityPack.HtmlWeb()).Load(UrlBiKurs);
 
             (from table in doc.DocumentNode.SelectNodes(XpathTable)
              where table.Attributes.Contains(@"id")

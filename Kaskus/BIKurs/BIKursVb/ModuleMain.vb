@@ -10,7 +10,7 @@ Module ModuleMain
     Private Const XpathTable As [String] = "//table[@class=""table1""]"
 
     Sub Main()
-        Dim doc = (New Hap.HtmlWeb()).Load(UrlBiKurs)
+        Dim doc = (New HtmlAgilityPack.HtmlWeb()).Load(UrlBiKurs)
 
         Dim nodes =
             (From table In doc.DocumentNode.SelectNodes(XpathTable)
@@ -49,5 +49,4 @@ Module ModuleMain
 
         Console.Read()
     End Sub
-
 End Module

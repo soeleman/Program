@@ -3,42 +3,37 @@
     using System;
     using System.Linq;
 
-    using Hap = HtmlAgilityPack;
-
     internal class Program
     {
-        private const String UrlTarget = @"http://dikoding.cloudapp.net/";
-        private const String XpathTable = @"//a[@href]";
-
         public static void Main()
         {
-            var doc = (new Hap.HtmlWeb()).Load(UrlTarget);
+            var doc = (new HtmlAgilityPack.HtmlWeb()).Load(@"http://dikoding.cloudapp.net/");
 
             // Linq to XML
             var nodes =
-                from n in doc.DocumentNode.Descendants(@"a")
+                from htmlnode in doc.DocumentNode.Descendants(@"a")
                 where 
-                    n.HasAttributes && 
-                    n.Attributes.Contains(@"class") == false && 
-                    n.Attributes.Contains(@"title")
-                select n;
+                    htmlnode.HasAttributes && 
+                    htmlnode.Attributes.Contains(@"class") == false && 
+                    htmlnode.Attributes.Contains(@"title")
+                select htmlnode;
 
             nodes
                 .ToList()
-                .ForEach(n => Console.WriteLine(n.InnerText.Trim()));
+                .ForEach(htmlnode => Console.WriteLine(htmlnode.InnerText.Trim()));
 
             Console.WriteLine("------------------------------");
 
             // XPath
             doc
                 .DocumentNode
-                .SelectNodes(XpathTable)
+                .SelectNodes(@"//a[@href]")
                 .Where(p =>
                     p.HasAttributes &&
                     p.Attributes.Contains(@"class") == false &&
                     p.Attributes.Contains(@"title"))
                 .ToList()
-                .ForEach(n => Console.WriteLine(n.InnerText.Trim()));
+                .ForEach(htmlnode => Console.WriteLine(htmlnode.InnerText.Trim()));
         }
     }
 }
