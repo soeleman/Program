@@ -8,8 +8,8 @@
         [TestMethod]
         public void TestModelPropertyChanged()
         {
-            var vm = new MainWindowViewModel();
-            var model = vm.Model;
+            var vm           = new MainWindowViewModel();
+            var model        = vm.Model;
             var modelChanged = false;
 
             vm.PropertyChanged += (s, e) =>
@@ -30,6 +30,7 @@
         public void TestFirsNamePropertyChanged()
         {
             var vm = new MainWindowViewModel();
+
             var firstNameChanged = false;
 
             vm.Model.PropertyChanged += (s, e) =>
