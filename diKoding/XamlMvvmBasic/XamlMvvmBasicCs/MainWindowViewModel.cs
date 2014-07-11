@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Windows;
 
     public class MainWindowViewModel
         : INotifyPropertyChanged
@@ -11,11 +12,16 @@
 
         public MainWindowViewModel()
         {
+            var personData = 
+                DesignerProperties.GetIsInDesignMode(new DependencyObject())
+                    ? new DataServiceInDesign().GetPerson()
+                    : new DataService().GetPerson();
+
             this.model = 
                 new Person
                     {
-                        FirstName = @"John", 
-                        LastName  = @"Doe"
+                        FirstName = personData.FirstName, 
+                        LastName  = personData.LastName
                     };
         }
 

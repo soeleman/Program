@@ -7,7 +7,15 @@ Public Class MainWindowViewModel
     Private _model As Person
 
     Sub New()
-        _model = New Person() With {.FirstName = "John", .LastName = "Doe"}
+        Dim personData = _
+            If(DesignerProperties.GetIsInDesignMode(New DependencyObject()), _
+                New DataServiceInDesign().GetPerson(), _
+                New DataService().GetPerson())
+
+        _model = New Person() With { _
+            .FirstName = personData.FirstName, _
+            .LastName = personData.LastName _
+        }
     End Sub
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
