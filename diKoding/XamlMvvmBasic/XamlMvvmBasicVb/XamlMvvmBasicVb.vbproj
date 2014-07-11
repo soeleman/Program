@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DelegateCommand.vb" />
     <Compile Include="DataService.vb" />
     <Compile Include="DataServiceInDesign.vb" />
     <Compile Include="IDataService.vb" />

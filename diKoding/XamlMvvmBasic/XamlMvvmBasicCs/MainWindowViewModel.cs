@@ -4,11 +4,13 @@
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
+    using System.Windows.Input;
 
     public class MainWindowViewModel
         : INotifyPropertyChanged
     {
         private Person model;
+        private ICommand clickCommand;
 
         public MainWindowViewModel()
         {
@@ -23,6 +25,10 @@
                         FirstName = personData.FirstName, 
                         LastName  = personData.LastName
                     };
+
+            this.clickCommand = 
+                new DelegateCommand(() => 
+                    this.model.LastName = String.Format(@"{0} *", this.model.LastName));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -37,6 +43,20 @@
             set
             {
                 this.model = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public ICommand ClickCommand
+        {
+            get
+            {
+                return this.clickCommand;
+            }
+
+            set
+            {
+                this.clickCommand = value;
                 this.OnPropertyChanged();
             }
         }

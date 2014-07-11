@@ -5,6 +5,7 @@ Public Class MainWindowViewModel
     Implements INotifyPropertyChanged
 
     Private _model As Person
+    Private _clickCommand As ICommand
 
     Sub New()
         Dim personData = _
@@ -16,6 +17,8 @@ Public Class MainWindowViewModel
             .FirstName = personData.FirstName, _
             .LastName = personData.LastName _
         }
+
+        _clickCommand = New DelegateCommand(Sub() _model.LastName = [String].Format("{0} *", _model.LastName))
     End Sub
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
@@ -27,6 +30,17 @@ Public Class MainWindowViewModel
 
         Set(value As Person)
             _model = value
+            OnPropertyChanged()
+        End Set
+    End Property
+
+    Public Property ClickCommand As ICommand
+        Get
+            Return _clickCommand
+        End Get
+
+        Set(value As ICommand)
+            _clickCommand = value
             OnPropertyChanged()
         End Set
     End Property
