@@ -7,11 +7,12 @@ Public Class MainWindowViewModel
     Private _model As Person
     Private _clickCommand As ICommand
 
-    Sub New()
-        Dim personData = _
-            If(DesignerProperties.GetIsInDesignMode(New DependencyObject()), _
-                New DataServiceInDesign().GetPerson(), _
-                New DataService().GetPerson())
+    Public Sub New()
+        Me.New(If(DesignerProperties.GetIsInDesignMode(New DependencyObject()), CType(New DataServiceInDesign(), IDataService), New DataService()))
+    End Sub
+
+    Public Sub New(dataService As IDataService)
+        Dim personData = dataService.GetPerson()
 
         _model = New Person() With { _
             .FirstName = personData.FirstName, _
@@ -20,6 +21,7 @@ Public Class MainWindowViewModel
 
         _clickCommand = New DelegateCommand(Sub() _model.LastName = [String].Format("{0} *", _model.LastName))
     End Sub
+
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 

@@ -25,8 +25,8 @@
                 throw new ArgumentNullException(@"execute");
             }
 
-            actionExecute  = execute;
-            funcCanExecute = canexecute;
+            this.actionExecute  = execute;
+            this.funcCanExecute = canexecute;
         }
 
         public event EventHandler CanExecuteChanged;

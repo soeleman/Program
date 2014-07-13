@@ -13,21 +13,27 @@
         private ICommand clickCommand;
 
         public MainWindowViewModel()
+            : this(DesignerProperties.GetIsInDesignMode(new DependencyObject())
+                    ? (IDataService)new DataServiceInDesign()
+                    : new DataService())
+        {
+        }
+
+        public MainWindowViewModel(
+            IDataService dataService)
         {
             var personData = 
-                DesignerProperties.GetIsInDesignMode(new DependencyObject())
-                    ? new DataServiceInDesign().GetPerson()
-                    : new DataService().GetPerson();
+                dataService.GetPerson();
 
-            this.model = 
+            this.model =
                 new Person
-                    {
-                        FirstName = personData.FirstName, 
-                        LastName  = personData.LastName
-                    };
+                {
+                    FirstName = personData.FirstName,
+                    LastName  = personData.LastName
+                };
 
-            this.clickCommand = 
-                new DelegateCommand(() => 
+            this.clickCommand =
+                new DelegateCommand(() =>
                     this.model.LastName = String.Format(@"{0} *", this.model.LastName));
         }
 
