@@ -22,7 +22,6 @@ Public Class MainWindowViewModel
         _clickCommand = New DelegateCommand(Sub() _model.LastName = [String].Format("{0} *", _model.LastName))
     End Sub
 
-
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
     Public Property Model As Person
