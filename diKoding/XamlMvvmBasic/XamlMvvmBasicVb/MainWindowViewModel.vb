@@ -8,7 +8,9 @@ Public Class MainWindowViewModel
     Private _clickCommand As ICommand
 
     Public Sub New()
+#If DEBUG Then
         Me.New(If(DesignerProperties.GetIsInDesignMode(New DependencyObject()), CType(New DataServiceInDesign(), IDataService), New DataService()))
+#End If
     End Sub
 
     Public Sub New(dataService As IDataService)

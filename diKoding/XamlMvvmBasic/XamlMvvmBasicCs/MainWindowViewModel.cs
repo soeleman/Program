@@ -12,13 +12,18 @@
         private Person model;
         private ICommand clickCommand;
 
+#if DEBUG
         public MainWindowViewModel()
             : this(DesignerProperties.GetIsInDesignMode(new DependencyObject())
                     ? (IDataService)new DataServiceInDesign()
                     : new DataService())
         {
         }
-
+#else
+        public MainWindowViewModel()
+        {
+        }
+#endif
         public MainWindowViewModel(
             IDataService dataService)
         {
