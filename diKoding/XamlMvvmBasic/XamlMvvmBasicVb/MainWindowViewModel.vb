@@ -9,7 +9,10 @@ Public Class MainWindowViewModel
 
     Public Sub New()
 #If DEBUG Then
-        Me.New(If(DesignerProperties.GetIsInDesignMode(New DependencyObject()), CType(New DataServiceInDesign(), IDataService), New DataService()))
+        Me.New( _
+            If(DesignerProperties.GetIsInDesignMode(New DependencyObject()), _
+               CType(New DataServiceInDesign(), IDataService), _
+               New DataService()))
 #End If
     End Sub
 
