@@ -5,15 +5,15 @@ Imports System.ComponentModel.DataAnnotations.Schema
 <Table("Blogs")> _
 Public NotInheritable Class Blog
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)> _
-    Public Property Id() As Int32
+    Public Property Id As Int32
 
     <StringLength(150)> _
-    Public Property Title() As [String]
+    Public Property Title As [String]
 
-    Public Property PostAt() As DateTime
+    Public Property PostAt As DateTime
 
     <StringLength(50)> _
-    Public Property PostBy() As [String]
+    Public Property PostBy As [String]
 
     Public Overrides Function ToString() As [String]
         Return [String].Format( _
